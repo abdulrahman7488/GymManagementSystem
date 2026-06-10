@@ -1,0 +1,65 @@
+@model IEnumerable<GymManagementSystem.BLL.ViewModels.MemberPlanViewModels.MemberPlanViewModel>
+@{ ViewData["Title"] = "Memberships"; }
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="mb-0">Memberships</h2>
+            <p class="text-muted mb-0">Manage member plan assignments</p>
+        </div>
+        <a asp-action="Create" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-1"></i> Assign Plan
+        </a>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5">
+            <i class="bi bi-inbox display-1 text-muted"></i>
+            <h4 class="mt-3 text-muted">No Memberships Found</h4>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Member</th><th>Plan</th><th>Start Date</th>
+                        <th>End Date</th><th>Status</th><th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model)
+                    {
+                        <tr>
+                            <td>@m.MemberName</td>
+                            <td>@m.PlanName</td>
+                            <td>@m.StartDate</td>
+                            <td>@m.EndDate</td>
+                            <td>
+                                <span class="badge @(m.IsActive ? "bg-success" : "bg-secondary")">
+                                    @m.Status
+                                </span>
+                            </td>
+                            <td class="text-center">
+                                @if (m.IsActive)
+                                {
+                                    <form asp-action="Cancel" method="post"
+                                          onsubmit="return confirm('Cancel this membership?')">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="membershipId" value="@m.Id" />
+                                        <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="bi bi-x-circle me-1"></i>Cancel
+                                        </button>
+                                    </form>
+                                }
+                                else { <span class="text-muted">—</span> }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
