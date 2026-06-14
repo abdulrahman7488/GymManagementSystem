@@ -91,6 +91,17 @@
             </div>
         </div>
 
+        <div class="col-12 col-md-6">
+            <label class="form-label">Profile Photo</label>
+            <input type="file" id="photoInput" name="Photo"
+                   class="form-control" accept="image/*" />
+            <div class="mt-2">
+                <img id="photoPreview" src="#" alt="Preview"
+                     style="display:none; width:120px; height:120px;
+                object-fit:cover; border-radius:50%;" />
+            </div>
+        </div>
+
         <footer class="d-flex justify-content-end mt-4">
             <button type="submit" class="btn btn-fill">Add</button>
         </footer>

@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
+
 
 namespace GymManagementSystem.BLL.ViewModels.MemberViewModels
 {
@@ -29,5 +32,8 @@ namespace GymManagementSystem.BLL.ViewModels.MemberViewModels
         [StringLength(150, MinimumLength = 2, ErrorMessage = "Street must be between 2 and 150 characters")]
         [RegularExpression(@"^[a-zA-Z0-9\s]+$", ErrorMessage = "Street can only contain letters, numbers, and spaces")]
         public string Street { get; set; } = default!;
+
+        public IFormFile? PhotoFile { get; set; }
+
     }
 }

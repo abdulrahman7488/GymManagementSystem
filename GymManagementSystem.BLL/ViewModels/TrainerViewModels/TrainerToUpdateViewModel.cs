@@ -1,5 +1,5 @@
-﻿
-using GymManagementSystem.DAL.Models.Enums;
+﻿using GymManagementSystem.DAL.Models.Enums;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace GymManagementSystem.BLL.ViewModels.TrainerViewModels
@@ -10,13 +10,11 @@ namespace GymManagementSystem.BLL.ViewModels.TrainerViewModels
 
         [Required(ErrorMessage = "Email Is Required")]
         [EmailAddress(ErrorMessage = "Invalid email format")]
-
         public string Email { get; set; } = default!;
 
         [Required(ErrorMessage = "Phone Number Is Required")]
         [Phone(ErrorMessage = "Invalid phone number")]
         [RegularExpression(@"^(010|011|012|015)\d{8}$", ErrorMessage = "Phone number must be a valid Egyptian mobile number")]
-
         public string Phone { get; set; } = default!;
 
         [Required(ErrorMessage = "Building Number Is Required")]
@@ -35,6 +33,9 @@ namespace GymManagementSystem.BLL.ViewModels.TrainerViewModels
 
         [Required(ErrorMessage = "Specialty is Required")]
         public Specialities Specialties { get; set; }
-    }
 
+        // ── Photo ────────────────────────────────────────────────
+        public string? Photo { get; set; }        // existing photo URL (read-only display)
+        public IFormFile? PhotoFile { get; set; } // new photo upload
+    }
 }
